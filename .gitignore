@@ -1,3 +1,51 @@
+#python code for Decision Tree 
+#w3school
+#data
+'''
+Age,Experience,Rank,Nationality,Go
+36,10,9,UK,NO
+42,12,4,USA,NO
+23,4,6,N,NO
+52,4,4,USA,NO
+43,21,8,USA,YES
+44,14,5,UK,NO
+66,3,7,N,YES
+35,14,9,UK,YES
+52,13,7,N,YES
+35,5,9,N,YES
+24,3,5,USA,NO
+18,3,7,UK,YES
+45,9,9,UK,YES
+'''
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn import tree 
+from sklearn.tree import DecisionTreeClassifier
+#read data my data have 5 col 'Age','Experience','Rank','Nationality',Go
+df=pd.read_csv('datasinama.csv')
+#dict of convert data to number
+d={'UK':0,'USA':1,'N':2,'YES':1,'NO':0}
+#use map func for convert text to number
+df['Nationality'],df['Go']=df['Nationality'].map(d),df['Go'].map(d)
+#split data to feature and target
+features=['Age','Experience','Rank','Nationality']
+
+X=df[features]
+y=df['Go']
+#use of DecisionTreeClassifier function
+dtree=DecisionTreeClassifier()
+dtree=dtree.fit(X,y)
+
+tree.plot_tree(dtree,feature_names=features)
+plt.title("DecisionTree")
+plt.show()
+#one of predict of your sample
+print(dtree.predict([[40, 10, 7, 1]]))
+
+
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
